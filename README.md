@@ -3,7 +3,7 @@ Vanilla JS filtarable table plugin with multi-column filtering, JSON data additi
 No dependencies! Around 5kb minified and even less gzipped!
 ## HowTo
 This is quick example, more option explanation will be added later
-```
+```js
   // Table class instance
   const myTable = new MyTableJs({
     table: document.getElementById('yourTable'),
@@ -35,7 +35,7 @@ And some examples of renderHeader() and renderRow() functions:
 Render each row function is simple template of row. Must return HTML element
 If you need inputs to interactively change rows data, add [data-column="row_column_where_data_is"] attribute to input
 Button to remove row must have [data-remove-row] attribute
-```
+```js
   // Render row
   // For example you have array of data rows
   // [
@@ -57,7 +57,7 @@ Button to remove row must have [data-remove-row] attribute
   }
 ```
 Render header function. This header example will filter rows and add new row 
-```
+```js
   function renderHeader() {
     const thead           = document.createElement('thead');
     thead.innerHTML = `
@@ -82,7 +82,7 @@ Render header function. This header example will filter rows and add new row
 ```
 Function that adds new row to the table, just a quick example compatible with header code above.
 Get all inputs values, put them into object, 
-```
+```js
   myTableJs.thead.querySelector('.addRow').addEventListener('click', (e) => {
     const newRow = e.target.closest('tr');
     const newData = {};
