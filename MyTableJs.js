@@ -1,9 +1,9 @@
 /**
-  * MyTableJs - Vanilla JS filtarable table plugin with multi-column filtering, 
+  * nimbleTable - Vanilla JS filtarable table plugin with multi-column filtering, 
   * JSON data addition, on-the-fly data update and pagination. 
   * Uses modern JS Map() for instant filtering and data update and DocumentFragment() for faster rendering
   * @version v1.0
-  * @homepage https://github.com/Tehnikus/MyTableJS
+  * @homepage https://github.com/Tehnikus/Nible-Table
   * @author Igor Alexeyev <tehnikus.ua@gmail.com>
   * @license Apache-2.0
   */
@@ -18,7 +18,7 @@
  *  @param {Function} onFilterEnd: function(filteredRowsMap) { returns Map() of filtered elements },
  * }
  */
-class MyTableJs {
+class nimbleTable {
   constructor(options) {
     // Options
     this.options = options;               
@@ -464,6 +464,7 @@ class MyTableJs {
     return Math.ceil(this.filteredOrder.length / this.pagination.perPage) || 1;
   }
 }
+
 
 
 
