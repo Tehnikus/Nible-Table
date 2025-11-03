@@ -1,11 +1,11 @@
-# MyTableJS
+# Nimble Table
 Vanilla JS filtarable table plugin with multi-column filtering, JSON data addition, on-the-fly data update and pagination. Uses modern JS Map() for instant filtering and data update and DocumentFragment() for faster rendering.
 No dependencies! Around 5kb minified and even less gzipped!
 ## HowTo
 This is quick example, more option explanation will be added later
 ```js
   // Table class instance
-  const myTable = new MyTableJs({
+  const myTable = new nimbleTable({
     table: document.getElementById('yourTable'),
     idField:  'keyword_id',
     pagination: {perPage: 10},
@@ -83,17 +83,17 @@ Render header function. This header example will filter rows and add new row
 Function that adds new row to the table, just a quick example compatible with header code above.
 Get all inputs values, put them into object, 
 ```js
-  myTableJs.thead.querySelector('.addRow').addEventListener('click', (e) => {
+  nimbleTable.thead.querySelector('.addRow').addEventListener('click', (e) => {
     const newRow = e.target.closest('tr');
     const newData = {};
     newRow.querySelectorAll('input, select').forEach(element => {
       newData[element.dataset.addRowColumn] = element.value || '';
     });
     newRow.rowType = 'newRow'; // This is not neccessary, but you can filter or highlight new rows by adding some data to row object.
-    const table = MyTableJs.setData([newData], true); // Add row to table. This function returns table element, that can be used later, see below
+    const table = nimbleTable.setData([newData], true); // Add row to table. This function returns table element, that can be used later, see below
 
     // These are not neccessary, but they scroll table to the new row
-    MyTableJs.setPage(MyTableJs.getTotalPages());
+    nimbleTable.setPage(nimbleTable.getTotalPages());
     table.lastChild.scrollIntoView({block: "nearest", inline: "nearest"});
   });
 ```
