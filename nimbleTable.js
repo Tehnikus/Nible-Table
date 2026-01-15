@@ -278,6 +278,12 @@ class nimbleTable {
         })
         this.options.onFilterStart(filters, filteredMap);
       }
+
+      // For every row and every column in row apply this logic. If result is true, then show the row.
+      // @param {String} column - The columnn in row where to search value. Has to be in input's data-search-column
+      // @param {String} value  - A value to be searched in row[column]
+      // @param {String} mode   - Column seach mode. Allowed one of these: ['=', '!', '>', '<'] May be set inside of input value (just type "!search word") or as dataset of individual input:  [data-search-mode="!"]
+      // Some more complex search modes available for input values separated by commas: ">1000, <2000" will search values more then 1000 and less then 2000 
       for (const { column, value, mode } of filters) {
         if (!value) continue;
 
