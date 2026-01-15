@@ -536,6 +536,10 @@ class nimbleTable {
   setPage(page) {
     const total = this.getTotalPages();
     this.pagination.page = Math.max(1, Math.min(page, total));
+    // Function fires on page change
+    if (this.options.onPageSet) {
+      this.options.onPageSet(this.pagination.page, this.pagination);
+    }
     this.#renderTable();
   }
 
