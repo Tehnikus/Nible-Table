@@ -322,10 +322,33 @@ class nimbleTable {
           .map(w => w.trim()) // Remove spaces
           .filter(Boolean);   // Remove empty
 
-        // True if some word included in row's column
-        const match = words.some(word =>
-          String(row[column] ?? '').toLowerCase().includes(word)
-        );
+        // New logic with some operators right in filter string
+        let columnPassedStrict = [];
+        let columnPassedLoose  = [];
+        for (let word of words) {
+          // Get logic operator from first word character
+          let operator = '';
+          if (['=', '!', '>', '<', '*'].includes(word[0])) {
+            operator = word[0];
+            word     = word.slice(1);
+          }
+          else if (mode) {
+            operator = mode;
+          }
+
+          // Function for number comparison
+          // If value is string then string length is used instead of actual number
+          function isNumber(n) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) }
+
+          if      (operator === '=') {columnPassedStrict.push(rowValue.some(val => val.toLowerCase() === word.toLowerCase()))}
+          else if (operator === '>') {columnPassedStrict.push(rowValue.some(val => (isNumber(val) ? parseInt(val) : val.length) > parseInt(word)))}
+          else if (operator === '<') {columnPassedStrict.push(rowValue.some(val => (isNumber(val) ? parseInt(val) : val.length) < parseInt(word)))}
+          else if (operator === '*') {columnPassedStrict.push(rowValue.some(val => !!val.length))}
+          else if (operator === '!') {columnPassedStrict.push(!rowValue.some(val => String(val ?? '').toLowerCase().includes(word)) || rowValue.some(val => (val === '' || val === null)))}
+          else    {columnPassedLoose.push(rowValue.some(val => String(val ?? '').toLowerCase().includes(word)))}
+        };
+
+        const match = (columnPassedStrict.length ? columnPassedStrict.every(Boolean) : true) && (columnPassedLoose.length ? columnPassedLoose.some(Boolean) : true);
 
         // Logic between search columns or inputs
         if      (mode === 'AND') andConditions.push(match);
