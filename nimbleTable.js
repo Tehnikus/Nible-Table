@@ -270,6 +270,14 @@ class nimbleTable {
       let orConditions  = [];
       let notConditions = [];
 
+      if (this.options.onFilterStart) {
+        // Add items in new Map()
+        let filteredMap = new Map();
+        this.filteredOrder.forEach(id => {
+          filteredMap.set(id, this.rowMap.get(id));
+        })
+        this.options.onFilterStart(filters, filteredMap);
+      }
       for (const { column, value, mode } of filters) {
         if (!value) continue;
 
