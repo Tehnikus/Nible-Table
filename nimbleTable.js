@@ -450,6 +450,14 @@ class nimbleTable {
     return this.tbody;
   }
 
+  clearData() {
+    this.order.forEach(id => {
+      this.rowMap.delete(id);
+    });
+    this.filteredOrder = this.order;
+    this.#renderTable();
+  }
+
   /**
    * Delete row from table data and remove it's element
    * @param {Number} id The id number of particular row to be deleted
