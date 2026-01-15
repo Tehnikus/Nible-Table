@@ -379,7 +379,7 @@ class nimbleTable {
       this.filteredOrder.forEach(id => {
         filteredMap.set(id, this.rowMap.get(id));
       })
-      this.options.onFilterEnd(filteredMap);
+      this.options.onFilterEnd(filters, filteredMap);
     }
 
     return this.filteredOrder;
