@@ -255,10 +255,11 @@ class nimbleTable {
 
   /**
    * Filter rows
-   * @param {Array} filters Array of objects [{column: "search_column", value: "search value", mode: "AND || OR || NOT"}, ... ]
-   * @returns {Array} of rows ids that matches filter conditions
+   * @param   {Array}   filters Array of objects [{column: "searchColumn", value: "search value", mode: '=' || '!' || '>' || '<'}, ... ]
+   * @param   {String}  columnsLogic: 'AND' || 'OR' || 'NOT'. How filter results between columns are treated. 
+   * @returns {Array}   of rows ids that matches filter conditions
    */
-  filterTable(filters) {
+  filterTable(filters = this.filters, columnsLogic = 'AND') {
     // Filter order
     this.filteredOrder = this.order.filter(id => {
 
