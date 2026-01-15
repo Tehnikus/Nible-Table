@@ -273,7 +273,40 @@ class nimbleTable {
       for (const { column, value, mode } of filters) {
         if (!value) continue;
 
-        // Words logic. You can separate multiple words in one search column (or input) by commas to search multiple words in same column
+        // Nested column name 
+        // const rowValue = row[column];
+        // const rowValue = column.split('.').reduce((acc, key) => {
+        //   return acc && acc[key];
+        // }, row);
+          
+        // Nested column name with wildcard support
+        // Nested row objects are accessed by regular point separated column names: row = { someData: {someNestedData} }, column = someData.someNestedData
+        // Wildcard "*" can be used as column name to search multiple nested objects on the same level, i.e. "rowData.*.*.someNestedObject.columnName"
+        const rowValue = column.split('.').reduce((acc, key) => {
+          // Always cast to array
+          if (!Array.isArray(acc)) acc = [acc];
+      
+          let result = [];
+      
+          for (const item of acc) {
+            if (item == null) continue;
+      
+            // Wildcard! If key === '*' then take all values from nested objects following provided path
+            if (key === '*') {
+              if (typeof item === 'object') {
+                result.push(...Object.values(item));
+              }
+              continue;
+            }
+      
+            // Regular key with or without dots separation: "name", "row.name", etc.
+            if (typeof item === 'object' && key in item) {
+              result.push(item[key]);
+            }
+          }
+      
+          return result;
+        }, row);
         // TODO Add strict equality
         const words = String(value)
           .toLowerCase()
