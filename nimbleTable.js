@@ -203,11 +203,11 @@ class nimbleTable {
       if (e.target.dataset.searchColumn) {
         let filterArray = [];
         headerElement.querySelectorAll('[data-search-column]').forEach(el => {
-          filterArray.push({column: el.dataset.searchColumn, value: el.value, mode: headerElement.querySelector('[data-filter-mode-switch]')?.value || "AND"});
+          filterArray.push({column: el.dataset.searchColumn, value: el.value, mode: el.dataset.searchMode || ""});
         });
-        console.log(filterArray);
-        
-        this.filterTable(filterArray);
+        this.filters = filterArray;
+        this.columnsLogic = 'AND';
+        this.filterTable();
       }
     });
 
