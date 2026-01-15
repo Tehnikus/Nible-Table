@@ -315,6 +315,9 @@ class nimbleTable {
       
           return result;
         }, row);
+
+        // Words logic. Words are the string inside sesrch input.
+        // Multiple words can be separated by comma to search in one column multiple words in same row[column]
         // TODO Add strict equality
         const words = String(value)
           .toLowerCase()
