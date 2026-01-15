@@ -242,8 +242,9 @@ class nimbleTable {
       targetRow.querySelectorAll('input, select, textarea').forEach(element => {
         newData[element.dataset.column] = element.value;
       });
-      newData.rowType = 'updatedRow';
-      targetRow.classList.add('updatedRow');
+      if (this.options.onRowUpdate) {
+        this.options.onRowUpdate(newData, targetRow);
+      }
       this.updateRow(targetRow.dataset.id, newData, false);
       // console.log(`Row updated`, targetRow.dataset.id, newData)
     });
