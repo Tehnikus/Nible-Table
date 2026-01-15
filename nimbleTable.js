@@ -30,7 +30,7 @@ class nimbleTable {
     this.order = [];                      // Rows ids in displayed order
     this.filteredOrder = [...this.order]; // Filtered rows ids
     this.rowIdCounter = 0;                // Counter to add rows that don't have numerated id
-
+    this.filters = [];
     this.eventListenersAdded = false;     // Add event listeners only once
 
     // Add tbody element to table if it's not present
