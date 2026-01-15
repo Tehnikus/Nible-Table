@@ -354,9 +354,9 @@ class nimbleTable {
         const match = (columnPassedStrict.length ? columnPassedStrict.every(Boolean) : true) && (columnPassedLoose.length ? columnPassedLoose.some(Boolean) : true);
 
         // Logic between search columns or inputs
-        if      (mode === 'AND') andConditions.push(match);
-        else if (mode === 'OR')  orConditions.push(match);
-        else if (mode === 'NOT') notConditions.push(!match);
+        if      (columnsLogic === 'AND') andConditions.push(match);
+        else if (columnsLogic === 'OR')  orConditions.push(match);
+        else if (columnsLogic === 'NOT') notConditions.push(!match);
       }
 
       const andOk = andConditions.length ? andConditions.every(Boolean) : true;
