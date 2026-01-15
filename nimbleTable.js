@@ -11,11 +11,15 @@
 /**
  * @param {Object} options Table options
  * {
- *  @param {Element}  table:       Table DOM element,
- *  @param {Object}   pagination:  { page, perPage }, if isset then pagination will be rendered in tfoot
- *  @param {Function} template:    function(rowDataObject) { returns row DOM Element },
- *  @param {String}   idField:     Key string in rowDataObject that represents unique row id number (in case you need to update data in DB by id),
- *  @param {Function} onFilterEnd: function(filteredRowsMap) { returns Map() of filtered elements },
+ *  @param {Element}  table:         Table DOM element,
+ *  @param {Object}   pagination:    { page, perPage, totalElements }, if isset then pagination will be rendered in tfoot
+ *  @param {String}   idField:       Key string in rowDataObject that represents unique row id number (in case you need to update data in DB by id),
+ *  @param {Function} template:      function(rowDataObject) { returns row DOM Element },
+ *  @param {Function} onFilterStart: function(filteredRowsMap) { returns Map() of filtered elements },
+ *  @param {Function} onFilterEnd:   function(filteredRowsMap) { returns Map() of filtered elements },
+ *  @param {Function} onPageSet:     function(pageNumber, this.pagination) { returns Map() of filtered elements },
+ *  @param {Function} onRowDelete:   function(deletedRowData) { returns object of deleted row data },
+ *  @param {Function} onRowUpdate:   function(newData, tagetRowElement) { returns object of new row data and target row element},
  * }
  */
 class nimbleTable {
