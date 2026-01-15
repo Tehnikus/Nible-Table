@@ -533,6 +533,7 @@ class nimbleTable {
     return this.filteredOrder.slice(start, start + perPage);
   }
 
+  // TODO Make async
   setPage(page) {
     const total = this.getTotalPages();
     this.pagination.page = Math.max(1, Math.min(page, total));
@@ -551,11 +552,8 @@ class nimbleTable {
     this.setPage(this.pagination.page - 1);
   }
 
+  // TODO Add this.pagination.totalElements to make virtual pages for not yet loaded elements
   getTotalPages() {
     return Math.ceil(this.filteredOrder.length / this.pagination.perPage) || 1;
   }
 }
-
-
-
-
