@@ -466,6 +466,10 @@ class nimbleTable {
   removeRow(id) {
     id = Number(id);
     if (!this.rowMap.has(id)) return false;
+    const tr = this.tbody.querySelector(`[data-id="${id}"]`);
+    if (this.options.onRowDelete) {
+      this.options.onRowDelete({...this.rowMap.get(id)});
+    }
     
     this.rowMap.delete(id); // Remove row data from Map()
     this.order = this.order.filter(x => x !== id); // Remove id from general display order
