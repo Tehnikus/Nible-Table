@@ -476,7 +476,6 @@ class nimbleTable {
     this.filteredOrder = this.filteredOrder.filter(x => x !== id); // Remove id from filtered display order
 
     // Remove element from DOM
-    const tr = this.tbody.querySelector(`[data-id="${id}"]`);
     if (tr) tr.remove();
 
     return true;
